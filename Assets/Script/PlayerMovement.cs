@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
+    private Collision collision;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //Jump
-        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) 
+        if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
@@ -65,21 +66,25 @@ public class PlayerMovement : MonoBehaviour
 
             if (rayHit.collider != null)
             {
-                if(rayHit.distance < 0.1f)
+                if(rayHit.distance < 1f)
                     anim.SetBool("isJumping",false);
             }
 
         }
     }
-    public float knockbackForce = 10f;
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
-            // 가시와 충돌했을 때 포물선으로 넉백하는 코드
-            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
-            GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            Vector2 direction = transform.position - collision.transform.position;
+            float knockbackForce = 25f; // 조절 가능한 힘의 크기
+            float knockbackAngle = 20f; // 조절 가능한 밀려나는 각도
+
+            // 포물선 형태로 밀려나가는 힘을 계산
+            Vector2 knockbackVector = Quaternion.AngleAxis(knockbackAngle, Vector3.forward) * direction.normalized * knockbackForce;
+
+            // 플레이어에 힘을 가해 밀려나가도록 설정
+            GetComponent<Rigidbody2D>().velocity = knockbackVector;
         }
     }
 }

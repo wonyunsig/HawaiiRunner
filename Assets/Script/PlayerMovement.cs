@@ -65,15 +65,13 @@ public class PlayerMovement : MonoBehaviour
 
             if (rayHit.collider != null)
             {
-                if(rayHit.distance < 0.5f)
+                if(rayHit.distance < 0.1f)
                     anim.SetBool("isJumping",false);
             }
 
         }
     }
     public float knockbackForce = 10f;
-    public float knockbackDuration = 0.3f;
-    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -71,4 +71,15 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+    public float knockbackForce = 10f;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            // 가시와 충돌했을 때 포물선으로 넉백하는 코드
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            GetComponent<Rigidbody2D>().AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        }
+    }
 }

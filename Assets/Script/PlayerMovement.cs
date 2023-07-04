@@ -72,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     public float knockbackForce = 10f;
+    public float knockbackDuration = 0.3f;
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

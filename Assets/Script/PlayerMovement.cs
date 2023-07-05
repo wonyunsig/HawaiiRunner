@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator anim;
     private Collision collision;
-
+    private bool canInteract = true; // 입력 기능 활성화 여부
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -22,22 +22,31 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //Jump
-        if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
+       // if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
         {
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            anim.SetBool("isJumping", true);
+            //rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            //anim.SetBool("isJumping", true);
         }
 
         //Stop Speed
-    if (Input.GetButtonUp("Horizontal"))
-        {
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x*0.5f, rigid.velocity.y);
-        }
+        
+            if (Input.GetButtonUp("Horizontal"))
+            {
+                rigid.velocity = new Vector2(rigid.velocity.normalized.x*0.5f, rigid.velocity.y);
+            }
+        
+    //if (Input.GetButtonUp("Horizontal"))
+       // {
+           // rigid.velocity = new Vector2(rigid.velocity.normalized.x*0.5f, rigid.velocity.y);
+       // }
 
         //Direction Sprite
-        if (Input.GetButtonDown("Horizontal"))
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         
+        
+            if (Input.GetButtonDown("Horizontal"))
+                spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        
+
         //Animation
         if(Mathf.Abs(rigid.velocity.x) < 0.3)
             anim.SetBool("isWalking", false);
@@ -48,8 +57,16 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Move Speed
-        float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        if (canInteract)
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+            if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
+            {
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                anim.SetBool("isJumping", true);
+            }
+        }
 
         //Max Speed
         if (rigid.velocity.x > maxSpeed)
@@ -71,20 +88,33 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
+    }public float launchForce = 10f; // 날리는 힘의 세기
+    public Vector2 launchDirection = new Vector2(-1f, 1f); // 날리는 방향 (왼쪽 위)
+
+
+    private void LaunchObject()
     {
-        if (collision.gameObject.CompareTag("Spike"))
+        rigid.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        
+        
+            Debug.Log("Ekd");
+            canInteract = true;
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (other.CompareTag("Spike") )
         {
-            Vector2 direction = transform.position - collision.transform.position;
-            float knockbackForce = 25f; // 조절 가능한 힘의 크기
-            float knockbackAngle = 20f; // 조절 가능한 밀려나는 각도
-
-            // 포물선 형태로 밀려나가는 힘을 계산
-            Vector2 knockbackVector = Quaternion.AngleAxis(knockbackAngle, Vector3.forward) * direction.normalized * knockbackForce;
-
-            // 플레이어에 힘을 가해 밀려나가도록 설정
-            GetComponent<Rigidbody2D>().velocity = knockbackVector;
+            canInteract = false; // 입력 기능 비활성화
+            Debug.Log("sdf");
+            launchForce = 20f;
+            LaunchObject();
         }
     }
 }

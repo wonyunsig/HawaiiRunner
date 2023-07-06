@@ -99,11 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        
-        
-            Debug.Log("Ekd");
             canInteract = true;
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -112,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Spike") )
         {
             canInteract = false; // 입력 기능 비활성화
-            Debug.Log("sdf");
             launchForce = 20f;
             LaunchObject();
         }

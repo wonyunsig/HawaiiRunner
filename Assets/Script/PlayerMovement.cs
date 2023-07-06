@@ -88,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-    }public float launchForce = 10f; // 날리는 힘의 세기
+    }
+    public float launchForce = 25f; // 날리는 힘의 세기
     public Vector2 launchDirection = new Vector2(-1f, 1f); // 날리는 방향 (왼쪽 위)
 
 
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Spike") )
         {
             canInteract = false; // 입력 기능 비활성화
-            launchForce = 20f;
+            launchForce = 25f;
             LaunchObject();
         }
     }

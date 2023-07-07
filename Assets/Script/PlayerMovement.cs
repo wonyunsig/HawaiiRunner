@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Collision collision;
     private bool canInteract = true; // 입력 기능 활성화 여부
+    private Vector3 mytrans;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        mytrans = transform.position;
         //Jump
        // if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
         {
@@ -111,6 +114,12 @@ public class PlayerMovement : MonoBehaviour
             canInteract = false; // 입력 기능 비활성화
             launchForce = 25f;
             LaunchObject();
+        }
+        if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
+        {
+            float newX = Random.Range(-10f, mytrans.x);
+            Vector3 newPosition = new Vector3(newX, 3, 0);
+            transform.position = newPosition;
         }
     }
 }

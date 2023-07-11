@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Spike") )
         {
             canInteract = false; // 입력 기능 비활성화
-            launchForce = 25f;
+            launchForce = 20f;
             LaunchObject();
         }
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포

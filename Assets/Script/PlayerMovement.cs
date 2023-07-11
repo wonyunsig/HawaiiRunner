@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -98,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LaunchObject()
     {
+        rigid.velocity = Vector2.zero;
         rigid.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
     }
 
@@ -112,12 +116,12 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Spike") )
         {
             canInteract = false; // 입력 기능 비활성화
-            launchForce = 20f;
+            launchForce = 25f;
             LaunchObject();
         }
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
         {
-            float newX = Random.Range(-10f, mytrans.x);
+            float newX = Random.Range(-15f, mytrans.x);
             Vector3 newPosition = new Vector3(newX, 3, 0);
             transform.position = newPosition;
         }

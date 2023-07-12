@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Stop Speed
         
-            if (Input.GetButtonUp("Horizontal"))
+            if (Input.GetButtonUp("Horizontal") && canInteract)
             {
                 rigid.velocity = new Vector2(rigid.velocity.normalized.x*0.5f, rigid.velocity.y);
             }
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         //Direction Sprite
         
         
-            if (Input.GetButtonDown("Horizontal"))
+            if (Input.GetButtonDown("Horizontal") && canInteract)
                 spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         
 
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float h = Input.GetAxisRaw("Horizontal");
             rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
-            if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
+            if (Input.GetButton("Jump") && !anim.GetBool("isJumping") && canInteract) 
             {
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 anim.SetBool("isJumping", true);
@@ -91,7 +91,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (rayHit.distance < 20f)
                 {
-                    
                 }
             }
 
@@ -126,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
         {
             float newX = Random.Range(-10f, mytrans.x);
-            Vector3 newPosition = new Vector3(newX-4f, 3, 0);
+            Vector3 newPosition = new Vector3(newX-4f, 5, 0);
             transform.position = newPosition;
         }
     }

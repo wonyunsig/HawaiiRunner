@@ -14,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - trap
   - Platform
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 3961980931
+    locked: 0
+  - name: Panel
+    uniqueID: 929429027
     locked: 0

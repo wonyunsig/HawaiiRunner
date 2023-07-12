@@ -89,8 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (rayHit.collider != null)
             {
-                if(rayHit.distance < 1f)
-                    anim.SetBool("isJumping",false);
+                if (rayHit.distance < 20f)
+                {
+                    
+                }
             }
 
         }
@@ -103,11 +105,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rigid.velocity = Vector2.zero;
         rigid.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
+        anim.SetBool("isJumping", true);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
             canInteract = true;
+            anim.SetBool("isJumping",false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -121,8 +125,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
         {
-            float newX = Random.Range(-15f, mytrans.x);
-            Vector3 newPosition = new Vector3(newX, 3, 0);
+            float newX = Random.Range(-10f, mytrans.x);
+            Vector3 newPosition = new Vector3(newX-4f, 3, 0);
             transform.position = newPosition;
         }
     }

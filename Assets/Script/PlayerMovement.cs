@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator anim;
     private Collision collision;
-    private bool canInteract = true; // 입력 기능 활성화 여부
+    public bool canInteract = true; // 입력 기능 활성화 여부
     private Vector3 mytrans;
     private float tppos;
     private void Awake()
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         {
             canInteract = false; // 입력 기능 비활성화
             rigid.velocity = Vector2.zero;
-            rigid.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
+           
             float newX = Random.Range(tppos, mytrans.x);
             Vector3 newPosition = new Vector3(newX-4f, 4, 0);
             transform.position = newPosition;

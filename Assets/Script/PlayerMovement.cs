@@ -124,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
         {
+            canInteract = false; // 입력 기능 비활성화
             float newX = Random.Range(-10f, mytrans.x);
             Vector3 newPosition = new Vector3(newX-4f, 5, 0);
             transform.position = newPosition;

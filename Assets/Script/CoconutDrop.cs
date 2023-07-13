@@ -6,15 +6,17 @@ public class CoconutDrop : MonoBehaviour
 {
     public GameObject Coconut;
     public Transform FallPos;
-    private int frame = 0;
-    public int Spawnspeed = 777;
+    public float originaltime = 1f;
+    public float Spawnspeed;
 
     void Update()
     {
-        frame++;
-        if (frame % Spawnspeed == 0)
+        Spawnspeed -= Time.deltaTime;
+        
+        if (Spawnspeed<=0)
         {
             Instantiate(Coconut).transform.position = FallPos.position;
+            Spawnspeed = originaltime;
         }
     }
 }

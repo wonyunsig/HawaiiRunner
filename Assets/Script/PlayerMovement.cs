@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canInteract = true; // 입력 기능 활성화 여부
     private Vector3 mytrans;
     private float tppos;
+    public AudioSource ticket;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -143,6 +144,10 @@ public class PlayerMovement : MonoBehaviour
             float newX = Random.Range(tppos, mytrans.x);
             Vector3 newPosition = new Vector3(newX-4f, 4, 0);
             transform.position = newPosition;
+        }
+        if (other.CompareTag("ticket"))
+        {
+            ticket.Play();
         }
     }
 }

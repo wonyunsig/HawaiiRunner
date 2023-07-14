@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1793696257095922477}
   - component: {fileID: 5844094336596033912}
   - component: {fileID: 5844094336596033913}
+  - component: {fileID: 3372716386419817850}
   m_Layer: 7
   m_Name: ginR_miwS
-  m_TagString: Spike
+  m_TagString: ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,3 +223,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCrash: {fileID: 5844094336596033912}
+--- !u!60 &3372716386419817850
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793696257095922476}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.84, y: 1.74}
+    newSize: {x: 3.84, y: 1.74}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.73, y: -0.52}
+      - {x: 1.8199999, y: -0.39}
+      - {x: 1.92, y: -0.21}
+      - {x: 1.92, y: 0.19999999}
+      - {x: 1.8399999, y: 0.35999998}
+      - {x: 1.74, y: 0.47}
+      - {x: 1.41, y: 0.69}
+      - {x: 0.77, y: 0.87}
+      - {x: -0.71999997, y: 0.87}
+      - {x: -0.74, y: 0.78}
+      - {x: -1.11, y: 0.78999996}
+      - {x: -1.4399999, y: 0.65999997}
+      - {x: -1.51, y: 0.59}
+      - {x: -1.7099999, y: 0.48999998}
+      - {x: -1.8199999, y: 0.38}
+      - {x: -1.92, y: 0.14999999}
+      - {x: -1.92, y: -0.19999999}
+      - {x: -1.8399999, y: -0.35999998}
+      - {x: -1.73, y: -0.47}
+      - {x: -1.41, y: -0.69}
+      - {x: -0.77, y: -0.87}
+      - {x: 0.71999997, y: -0.87}
+      - {x: 0.74, y: -0.78}
+      - {x: 1.11, y: -0.78999996}
+      - {x: 1.4599999, y: -0.66999996}
+    - - {x: -0.26999998, y: -0.04}
+      - {x: -0.29999998, y: -0.02}
+      - {x: -0.66999996, y: -0.02}
+      - {x: -0.5, y: 0.02}
+      - {x: -0.47, y: 0.049999997}
+      - {x: -0.47, y: 0.12}
+      - {x: 0.47, y: 0.12}
+      - {x: 0.42999998, y: 0.03}
+      - {x: 0.5, y: 0.02}
+      - {x: 0.63, y: -0.02}
+      - {x: 0.29999998, y: -0.02}
+      - {x: 0.26999998, y: -0.049999997}
+      - {x: 0.26999998, y: -0.12}
+      - {x: -0.26999998, y: -0.12}

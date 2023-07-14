@@ -105,13 +105,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     public float launchForce = 25f; // 날리는 힘의 세기
+    public float launchForce2 = 75f; // 날리는 힘의 세기2
     public Vector2 launchDirection = new Vector2(-1f, 1f); // 날리는 방향 (왼쪽 위)
+    public Vector2 launchDirection2 = new Vector2(-1f, 1f); // 날리는 방향 (왼쪽 위)
 
 
     private void LaunchObject()
     {
         rigid.velocity = Vector2.zero;
         rigid.AddForce(launchDirection.normalized * launchForce, ForceMode2D.Impulse);
+        anim.SetBool("isJumping", true);
+    }
+    private void LaunchObject2()
+    {
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(launchDirection2.normalized * launchForce2, ForceMode2D.Impulse);
         anim.SetBool("isJumping", true);
     }
 
@@ -133,8 +141,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("ring") )
         {
             canInteract = false; // 입력 기능 비활성화
-            launchForce = 75f;
-            LaunchObject();
+            launchForce2 = 75f;
+            LaunchObject2();
         }
         if (other.CompareTag("TP"))//TP태그를 가진 오브젝트에 충돌 시 텔포
         {

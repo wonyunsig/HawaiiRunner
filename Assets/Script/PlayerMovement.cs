@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
         
         //Jump
        // if (Input.GetButton("Jump") && !anim.GetBool("isJumping")) 
-        {
+       // {
             //rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             //anim.SetBool("isJumping", true);
-        }
+       // }
 
         //Stop Speed
         

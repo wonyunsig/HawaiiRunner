@@ -13,6 +13,12 @@ public class PanelController : MonoBehaviour
         Panel.SetActive(true);
         count = 1;
         Time.timeScale = 0;
+    } 
+    public void StageSelect()
+    {
+        Panel.SetActive(true);
+        count = 1;
+        Time.timeScale = 1;
     }
 
     public void ResumeButton()
